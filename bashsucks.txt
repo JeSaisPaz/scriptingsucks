@@ -1,0 +1,301 @@
+                           (                         
+   (                )      )\ )               )      
+ ( )\     )      ( /(     (()/(   (        ( /(      
+ )((_) ( /(  (   )\())___  /(_)) ))\   (   )\()) (   
+((_)_  )(_)) )\ ((_)\|___|(_))  /((_)  )\ ((_)\  )\  
+ | _ )((_)_ ((_)| |(_)    / __|(_))(  ((_)| |(_)((_) 
+ | _ \/ _` |(_-<| ' \     \__ \| || |/ _| | / / (_-< 
+ |___/\__,_|/__/|_||_|    |___/ \_,_|\__| |_\_\ /__/  V1.2.
+
+/!\ POUR TROUVER UNE COMMANDE SPECIFIQUE, FAITES CTRL+F ET TAPER LA COMMANDE OU UN MOT CLE /!\
+
+NOTEABENE: quand vous voyez "$" cela signifie que vous exécutez la commande, ">" est soit un resultat soit une ligne dans un fichier en fonction du contexte (Vous etes pas cons). Tous ce qui est entourer de " ``` " est un script en lui meme.
+
+0) Structure d'un fichier bash
+
+> #!/bin/bash
+>
+> echo "Oubliez pas le petit binbash en entête"
+>
+                                                     
+1) Commandes utiles
+
+- echo | affiche du texte
+	$ echo "du texte"
+	> du texte
+
+- cd | rentre dans un repertoire
+	$ cd /temp/
+	> (On est dans le repertoire /temp)
+
+- ls | liste les fichiers dans le repertoire 
+	$ ls
+	> projet.zip
+	> video.mp4
+	> main.c
+
+- rm | supprime un fichier
+	$ rm projet.zip
+	$ ls
+	> video.mp4
+	> main.c
+
+- cp | Copie un ficher d'une position a une autre
+	$ cp /fichier-copie.txt /temp
+	$ ls
+	> video.mp4
+	> main.c
+	> fichier-copie.txt
+	
+- tar | gestionnaire de fichier compresse (zip, 7z, tar.gz, ...)
+
+OPTIONS: 
+	-c | Cree une archive avec certains fichiers
+	-x | Extrais les fichiers d'une archive
+EXEMPLE:
+
+	$ tar -c archive.zip video.mp4
+	$ ls
+	> video.mp4
+	> main.c
+	> archive.zip
+
+- scp | Telecharge un fichier depuis une connexion ssh
+	$ scp fichier.txt
+	$ ls
+	> video.mp4
+	> main.c
+	> archive.zip
+	> fichier.txt
+
+- nano | Ouvre l'editeur de texte nano
+	$ nano fichier.txt
+	> Ceci est un fichier
+	> Texte
+	> De plusieurs lignes
+	>
+COMMANDES:
+	CTRL + X | Fermer l'editeur
+	CTRL + S | Sauvegarder les modifications
+
+- whoami | Donne l'utilisateur qui utilise la CLI
+	$ whoami
+	> root
+
+- date | Donne la date et l'heure
+	& date
+	> Mon Mar 17 07:02:40 PM UTC 2025
+
+- df -h | Donne l'utilisation du disque
+	> Filesystem                         Size  Used Avail Use% Mounted on
+	> disque                              3.2G  4.6M  3.2G   1% /run
+
+- top | Equivalent du gestionnaire des taches
+
+- uptime | Donne la temps d'utilisation d'un server/pc
+	$ uptime
+	> 19:04:54 up 37 days,  6:35,  3 users,  load average: 0.00, 0.00, 0.00
+
+- touch | Cree un fichier vide
+	$ vide.void (y'a rien dedans)
+
+- mv | bouge un fichier d'une position a une autre
+	$ ls /temp/ 
+	> f1.txt
+	> f2.txt
+	> f3.txt
+	$ mv /temp/f1.txt /temp2/
+	$ ls /temp2/
+	> f1.txt
+	$ ls /temp/
+	> f2.txt
+	> f3.txt
+
+- awk | Extrait la premiere colonne d'un fichier
+	$ cat ex.txt
+	> ligne 1
+	> ligne 2
+	> ligne 3
+	$ awk ex.txt
+	> ligne 1
+
+- grep | Deux usages. 1) Rechercher un mot dans un fichier 2) Rechercher une recursivite dans un dossier
+CAS 1:
+	grep "mot" dans_ce_fichier.txt
+CAS 2:
+	grep "mot" /dans_ce_dossier/
+
+- ping | Envoi un packet a une ip specifique par icmp
+	$ ping louisflix.chickenkiller.com
+	> PING louisflix.chickenkiller.com (91.86.92.133): 56 data bytes
+	> 64 bytes from 91.86.92.133: icmp_seq=0 ttl=64 time=11.619 ms
+
+- chmod | Rend un script executable
+USAGE COMMUN:
+	$ chmod +x script.sh
+	(script.sh est maintenant executable, attention, si vous vous foirez dans le nom du fichier vous allez rendre des trucs aléatoires executables, toujours verifier que le ficher est le bon en complétant avec TAB la commande)
+
+- apt | TOUJOURS utiliser sudo devant apt !!! Ceci sert a installer des packets (Avec les distros qui le supportent dont ubuntu)
+USAGE COMMUN:
+	$ sudo apt install cowsay (Installe le packet "cowsay" et ses pre-requis)  
+
+2) Caracteres speciaux
+
+\n | Nouvelle ligne
+\t | Tabulation
+\c | Annulation du saut de ligne
+\b | Retour arriere
+\0n| Code octal de caractere (Pour les accents)
+
+3) Les boucles, fonctions et comparaisons
+
+3.1. BOUCLE FOR
+
+``` 
+#!/bin/bash
+
+for i in {1..5}; do
+  echo "Itération $i"
+done
+
+```
+Commentaire: ici la boucle for utilise "i" comme compteur, ce compteur va de 1 a 5 " {1..5} ", a chaque tour il va afficher " Iteration" avec la valeur de "i" correspondante
+
+3.2. BOUCLE WHILE
+
+```
+#!/bin/bash
+
+count=1
+while [ $count -le 5 ]; do
+  echo "Count: $count"
+  count=$((count + 1))  # Incrémentation
+done
+
+```
+Commentaire: ici "count" est notre compteur. tant que count est inferieur ou egal a 5 ( -le ), on va afficher "Count: " avec la valeur de count, ensuite on increment count de 1.
+
+3.3. BOUCLE UNTIL (DO WHILE)
+
+```
+#!/bin/bash
+
+count=1
+until [ $count -gt 5 ]; do
+  echo "Until Count: $count"
+  count=$((count + 1))
+done
+
+```
+Commentaire: quasi le meme principe sauf que la condition est -gt qui signifie greater than, plus grand que
+
+3.4. FOR EACH (FOR LIST)
+
+```
+#!/bin/bash
+
+for i in 1 2 3 4 5; do
+  echo "Valeur: $i"
+done
+```
+Commentaire: Ici pour chaque valeur dans la liste qui contient (1 2 3 4 5), on va afficher la valeur de "i" qui va prendre la valeur de chaque elements
+
+ceci peut aussi se representer sous cette forme
+
+```
+#!/bin/bash
+
+fruits=("Pomme" "Banane" "Orange")
+
+for fruit in "${fruits[@]}"; do
+  echo "Fruit : $fruit"
+done
+```
+
+ou
+
+```
+#!/bin/bash
+
+for file in /chemin/*.txt; do
+  echo "Fichier trouvé : $file"
+done
+```
+Commentaire 2: Ici on fait l'action pour tous les fichiers dans /chemin/ qui ont l'extension ".txt". Ceci peut etre repliquer pour d'autres conditions, par exemple tous les fichiers qui commencent par louis et qui ont l'extension .obj peut se representer sous la forme louis*.obj
+
+BONUS: 
+
+Conditions de boucles:
+Le bash c'est un joyeux bordel, donc je vais vous donner 2 facons de bosser. soit avec des [], la base et fonctionne partout OU avec des
+(). IL NE FAUT JAMAIS MELANGER PLUSIEURS METHODES SINON C'EST UNE HORREUR QUAND ON REPASSE SUR VOS SCRIPTS. De plus, certains kernels (noyaux) n'autorisent qu'une seule methode. Deconnez pas avec ca.
+
+B.1. LES []
+
+Cette methode est universelle mais n'autorise pas les regex.
+Quand vous utilisez [], n'oubliez pas le "$" devant vos variables.
+
+-eq : égal
+-ne : différent 
+-lt : plus petit 
+-le : plus petit ou égal
+-gt : plus grand
+-ge : plus grand ou égal
+
+Remarque: C'est la meme chose pour la methode [[]] sauf qu'on peut utiliser les regex et les "&&" et "||"
+
+B.2. LES ()
+
+Cette methode est beaucoup plus moderne (DONC MOINS SUPPORTEE, NOUVEAU = INSTABLE !!!) et accepte les operateurs logiques mathematiques. Vous ne devez pas utiliser "$" devant vos variables.
+
+== : égal
+!= : différent 
+> : plus petit 
+>= : plus petit ou égal
+< : plus grand
+<= : plus grand ou égal
+
+4) Les conditions
+
+En bash c'est simple. if, elif, else. Tous suivit d'un then (sauf else sinon c'est trop facile) et fini par leur verlan.
+
+```
+#!/bin/bash
+
+$a = 10;
+$b = 5;
+
+if (a < b); then
+	echo "a est plus petit que b"
+else
+	echo "b est plus petit que a"
+fi
+```
+
+ou
+
+```
+#!/bin/bash
+
+$a = 10;
+$b = 5;
+
+if (a < b); then
+	echo "a est plus petit que b"
+elif (a = b); then
+	echo "b est egal a a"
+else
+	echo "a est strictement plus grand que b"
+fi
+```
+
+Vous avez aussi les "case" mais c'est nul et tout le monde les detestes.
+
+4. Tutos rapides
+
+Comment j'ajoute une ligne a la fin d'un fichier ???
+
+	$ echo >> ton_fichier.txt "Le texte que tu veux ajouter"
+
+
+
+

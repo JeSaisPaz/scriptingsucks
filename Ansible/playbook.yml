@@ -1,0 +1,20 @@
+---
+- name: Exemple de playbook pour machine locale
+  hosts: local
+  gather_facts: false  # true si tu veux les facts du système
+
+  tasks:
+    - name: Afficher un message
+      ansible.builtin.debug:
+        msg: "Hello depuis la machine locale"
+
+    # Exemple : Créer un fichier
+    # - name: Créer un fichier dans /tmp
+    #   ansible.builtin.file:
+    #     path: /tmp/fichier_test.txt
+    #     state: touch
+    #     mode: '0644'
+
+    # Tu peux ajouter ici d'autres commandes à exécuter
+    # Vous pouvez trouver les commandes ici:
+    # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/

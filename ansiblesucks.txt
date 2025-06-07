@@ -1,0 +1,36 @@
+  ___            _ _     _      _____            _        
+ / _ \          (_) |   | |    /  ___|          | |       
+/ /_\ \_ __  ___ _| |__ | | ___\ `--. _   _  ___| | _____ 
+|  _  | '_ \/ __| | '_ \| |/ _ \`--. \ | | |/ __| |/ / __|
+| | | | | | \__ \ | |_) | |  __/\__/ / |_| | (__|   <\__ \
+\_| |_/_| |_|___/_|_.__/|_|\___\____/ \__,_|\___|_|\_\___/ Ansible V2.18
+
+Pour le bon fonctionnement d'ansible il vous faut:
+ 1) Un inventory
+    Celui-ci stores des informations relatives aux PCs dont vosu aller envoyer votre playbook
+ 2) Les playbooks
+    Ceux-ci sont des suites d'instructions exécutées par ansible sur les machines de l'inventory
+    (A voir comme un script bash élaboré et exécutable sur plusieurs machines)
+
+Structure de fichiers:
+
+Ansible/
+├─ inventory.ini
+└─ playbook.yml
+
+Vous trouverez des templates de fichiers inventory et playbook dans le dossier ansible.
+
+Pour installer ansible sur la machine locale:
+```
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt update
+sudo apt install ansible
+```
+
+Pour executer votre playbook ansible avec votre inventory:
+```
+ansible-playbook -i inventory.ini playbook.yml
+```
+
+Conseil principal pour ansible, stressez pas, lisez la documentation et googler correctement.
+Vous trouverez !

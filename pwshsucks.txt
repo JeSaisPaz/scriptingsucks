@@ -1,0 +1,212 @@
+__________               .__      _________              __            
+\______   \__  _  _______|  |__  /   _____/__ __   ____ |  | __  ______
+ |     ___/\ \/ \/ /  ___/  |  \ \_____  \|  |  \_/ ___\|  |/ / /  ___/
+ |    |     \     /\___ \|   Y  \/        \  |  /\  \___|    <  \___ \ 
+ |____|      \/\_//____  >___|  /_______  /____/  \___  >__|_ \/____  >
+                       \/     \/        \/            \/     \/     \/ V7.0-PWSH+
+
+/!\ POUR TROUVER UNE COMMANDE SPECIFIQUE, FAITES CTRL+F ET TAPEZ LA COMMANDE OU UN MOT CLE /!\
+
+NOTEABENE : `$` représente une variable ou l'invite PowerShell. `>` est un résultat ou une sortie. Tout ce qui est entouré de ``` ``` est un script complet.
+
+---
+
+0) Structure d'un fichier PowerShell
+
+> #!/usr/bin/env pwsh  
+>
+> Write-Host "N'oublie pas le shebang pour exécution sur Linux/Mac"  
+
+---
+
+1) Commandes utiles
+
+- `Write-Host` | Affiche du texte
+	```powershell
+	> Write-Host "du texte"
+	du texte
+	```
+
+- `Set-Location` | Change de répertoire
+	```powershell
+	> Set-Location C:\Temp
+	```
+
+- `Get-ChildItem` | Liste les fichiers
+	```powershell
+	> Get-ChildItem
+	projet.zip
+	video.mp4
+	main.cs
+	```
+
+- `Remove-Item` | Supprime un fichier
+	```powershell
+	> Remove-Item projet.zip
+	```
+
+- `Copy-Item` | Copie un fichier
+	```powershell
+	> Copy-Item fichier.txt -Destination C:\Temp
+	```
+
+- `Compress-Archive` et `Expand-Archive` | Gère les archives ZIP
+	```powershell
+	> Compress-Archive -Path video.mp4 -DestinationPath archive.zip
+	> Expand-Archive -Path archive.zip -DestinationPath C:\Extracted
+	```
+
+- `scp` (si installé via OpenSSH) | Transfère un fichier via SSH
+	```powershell
+	> scp fichier.txt user@host:/remote/path
+	```
+
+- `notepad`, `code`, ou `nano` (si dispo) | Ouvre un éditeur
+	```powershell
+	> notepad fichier.txt
+	```
+
+- `whoami` | Affiche l'utilisateur actuel
+	```powershell
+	> whoami
+	domain\user
+	```
+
+- `Get-Date` | Affiche la date et l'heure
+	```powershell
+	> Get-Date
+	Saturday, June 7, 2025 7:00:00 PM
+	```
+
+- `Get-PSDrive` | Espace disque (équivalent de `df -h`)
+	```powershell
+	> Get-PSDrive
+	```
+
+- `Get-Process` | Liste les processus (équivalent de `top`)
+	```powershell
+	> Get-Process
+	```
+
+- `Get-Uptime` (si dispo) ou via `(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime`
+	```powershell
+	> (Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime
+	```
+
+- `New-Item` | Crée un fichier vide
+	```powershell
+	> New-Item -Path vide.txt -ItemType File
+	```
+
+- `Move-Item` | Déplace un fichier
+	```powershell
+	> Move-Item C:\Temp\f1.txt C:\Temp2\
+	```
+
+- `Select-String` | Équivalent de `grep`
+	```powershell
+	> Select-String -Path fichier.txt -Pattern "mot"
+	```
+
+- `Test-Connection` | Équivalent de `ping`
+	```powershell
+	> Test-Connection -ComputerName google.com
+	```
+
+- `Set-ExecutionPolicy` | Pour autoriser les scripts à s’exécuter
+	```powershell
+	> Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+	```
+
+- `Install-Package` | Installe un module ou logiciel (nécessite NuGet)
+	```powershell
+	> Install-Package cowsay
+	```
+
+---
+
+2) Caractères spéciaux
+
+`n` | Nouvelle ligne  
+`t` | Tabulation  
+``r`` | Retour chariot  
+``b`` | Backspace  
+
+---
+
+3) Boucles, fonctions et conditions
+
+3.1. BOUCLE FOR
+
+```powershell
+for ($i = 1; $i -le 5; $i++) {
+    Write-Host "Itération $i"
+}
+
+3.2. WHILE
+
+```powershell
+$count = 1
+while ($count -le 5) {
+    Write-Host "Count: $count"
+    $count++
+}
+```
+
+3.3. DO UNTIL
+
+```powershell
+$count = 1
+do {
+    Write-Host "Until Count: $count"
+    $count++
+} until ($count -gt 5)
+```
+
+3.4. FOREACH
+
+```powershell
+$fruits = @("Pomme", "Banane", "Orange")
+foreach ($fruit in $fruits) {
+    Write-Host "Fruit: $fruit"
+}
+```
+
+OU sur des fichiers :
+
+```powershell
+foreach ($file in Get-ChildItem C:\chemin\*.txt) {
+    Write-Host "Fichier trouvé : $($file.Name)"
+}
+```
+
+BONUS : Opérateurs de comparaison PowerShell (simples à lire)
+-eq : égal
+-ne : différent
+-lt : inférieur
+-le : inférieur ou égal
+-gt : supérieur
+-ge : supérieur ou égal
+-like : pattern matching (*, ?)
+-match : regex
+
+4 Conditions
+
+```powershell
+$a = 10
+$b = 5
+
+if ($a -lt $b) {
+    Write-Host "a est plus petit que b"
+} elseif ($a -eq $b) {
+    Write-Host "a est égal à b"
+} else {
+    Write-Host "a est plus grand que b"
+}
+```
+
+5 Tuto rapide
+
+```powershell
+"Le texte que tu veux ajouter" | Add-Content -Path ton_fichier.txt
+```

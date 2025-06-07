@@ -5,6 +5,48 @@
 | | | | | | \__ \ | |_) | |  __/\__/ / |_| | (__|   <\__ \
 \_| |_/_| |_|___/_|_.__/|_|\___\____/ \__,_|\___|_|\_\___/ Ansible V2.18
 
+🧠 Qu’est-ce qu’Ansible ?
+
+Ansible est un outil d’automatisation informatique.
+
+Il permet de :
+
+    exécuter automatiquement des tâches sur un ou plusieurs ordinateurs (ex: installer un logiciel, copier un fichier, redémarrer un service).
+
+    configurer des serveurs sans avoir à le faire manuellement.
+
+    déployer des applications ou scripts de manière cohérente et reproductible.
+
+💡 Pourquoi c’est utile ?
+
+Imagine que tu dois :
+
+    Installer Apache sur 10 serveurs,
+
+    Modifier un fichier de configuration sur chacun,
+
+    Redémarrer le service web.
+
+Tu pourrais te connecter sur chaque machine, taper les commandes… ou bien écrire un petit fichier Ansible qui le fait pour toi, sur toutes les machines en une seule commande.
+
+⚙️ Comment ça fonctionne ?
+
+Ansible suit une architecture agentless :
+
+    Tu n’as pas besoin d’installer quoi que ce soit sur les machines distantes.
+
+    Il utilise simplement SSH (ou localhost) pour s’y connecter.
+
+    Tu écris des playbooks (scripts en YAML) décrivant quoi faire.
+
+______          _   _       ______          _   _                  
+| ___ \        | | (_)      | ___ \        | | (_)                 
+| |_/ /_ _ _ __| |_ _  ___  | |_/ / __ __ _| |_ _  __ _ _   _  ___ 
+|  __/ _` | '__| __| |/ _ \ |  __/ '__/ _` | __| |/ _` | | | |/ _ \
+| | | (_| | |  | |_| |  __/ | |  | | | (_| | |_| | (_| | |_| |  __/
+\_|  \__,_|_|   \__|_|\___| \_|  |_|  \__,_|\__|_|\__, |\__,_|\___|
+                                                     | |           
+                                                     |_|           
 Pour le bon fonctionnement d'ansible il vous faut:
  1) Un inventory
     Celui-ci stores des informations relatives aux PCs dont vosu aller envoyer votre playbook

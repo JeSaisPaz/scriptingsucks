@@ -2,11 +2,11 @@
 
 # À propos
 
-Ce projet contient un fichier texte simple (.txt) et ne constitue pas un programme exécutable.
+Ce projet contient 3 fichiers textes simples (.txt) et ne constitue pas un programme exécutable.
 
 # Contenu
 
-Le fichier inclus est uniquement un fichier .txt, ce qui signifie qu'il ne contient aucun code exécutable, script ou programme.
+Les fichier inclus sont uniquement 3 fichiers .txt, ce qui signifie qu'il ne contient aucun code exécutable, script ou programme.
 
 # Licence
 
@@ -14,5 +14,5 @@ Ce fichier est distribué sous licence MIT, bien que son contenu soit purement t
 
 # Remarque
 
-Si vous vous attendiez à un programme ou à un script, veuillez noter qu'il s'agit simplement d'un fichier texte et non d'une application ou d'un programme fonctionnel.
+Si vous vous attendiez à un programme ou à un script, veuillez noter qu'il s'agit simplement de 3 fichiers textes et non d'une application ou d'un programme fonctionnel.
 

@@ -71,7 +71,7 @@ sudo apt install ansible
 
 Pour executer votre playbook ansible avec votre inventory:
 ```
-ansible-playbook -i inventory.ini playbook.yml
+sudo ansible-playbook -i inventory.ini playbook.yml
 ```
 
 Conseil principal pour ansible, stressez pas, lisez la documentation et googler correctement.
